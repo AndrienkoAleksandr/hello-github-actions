@@ -2,8 +2,8 @@ FROM registry.access.redhat.com/ubi8/openjdk-11@sha256:b9481cc1bfb3b8c332b5d6f8f
 
 WORKDIR /home/jboss
 ADD entrypoint.sh /entrypoint.sh
+USER root
 RUN chmod +x /entrypoint.sh; mkdir -p github-action
 COPY . github-action
-USER root
 RUN cd github-action; mvn clean install
 ENTRYPOINT ["/entrypoint.sh"]
