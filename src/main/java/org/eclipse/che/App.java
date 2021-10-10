@@ -23,6 +23,10 @@ public class App
     public static void main( String[] args ) throws IOException
     {
         String repoPath = System.getenv("GITHUB_WORKSPACE");
+        if (repoPath == null) {
+            throw new RuntimeException("Env variable \"GITHUB_WORKSPACE\" wasn't set.");
+        }
+
         File goSum = new File(Path.of(repoPath, "go.sum").toUri());
         Collection<String> goSumDeps = readGoSumFile(goSum);
 //        System.out.println( "Hello World!" + depList);
