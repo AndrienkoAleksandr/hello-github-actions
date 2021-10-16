@@ -8,10 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class App 
-{
-    public static void main( String[] args ) throws IOException
-    {
+public class App {
+    public static void main( String[] args ) throws IOException {
         String repoPath = System.getenv("GITHUB_WORKSPACE");
         if (repoPath == null) {
             throw new RuntimeException("Env variable \"GITHUB_WORKSPACE\" wasn't set.");
@@ -19,7 +17,6 @@ public class App
 
         File goSum = new File(Path.of(repoPath, "go.sum").toUri());
         Collection<String> goSumDeps = readGoSumFile(goSum);
-//        System.out.println( "Hello World!" + depList);
 
         String patternString = "\\|\\s+\\[(.*)@.*\\]\\(.*\\)\\s.*";
         Pattern pattern = Pattern.compile(patternString);
@@ -36,10 +33,14 @@ public class App
         }
 
         System.out.println("===================");
+        List<String> missedDeps = new ArrayList<>();
         for (String goSumDep: goSumDeps) {
             if (!declaredDep.contains(goSumDep)) {
-                System.out.println("Add new dependency to DEPENDENCIES.md file" + goSumDep);
+                missedDeps.add(goSumDep);
             }
+        }
+        if (missedDeps.size() > 0) {
+            throw new RuntimeException("Add new dependencies to DEPENDENCIES.md file" + missedDeps);
         }
     }
 
