@@ -3,16 +3,6 @@ package org.eclipse.che;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.*;
-//import java.util.stream.Collectors;
-
-//import org.commonmark.Extension;
-//import org.commonmark.ext.gfm.tables.TablesExtension;
-//import org.commonmark.node.Node;
-//import org.commonmark.node.Visitor;
-//import org.commonmark.parser.Parser;
-//import org.commonmark.renderer.html.HtmlRenderer;
-//import org.commonmark.renderer.text.CoreTextContentNodeRenderer;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
